@@ -3,7 +3,8 @@
 use std::os::raw::{c_int, c_void};
 
 use crate::adl_struct::{
-    ADLODNCapabilitiesX2, ADLODNFanControl, AdapterInfo, ADL_CONTEXT_HANDLE,
+    ADLODNCapabilitiesX2, ADLODNFanControl, ADLODNPowerLimitSetting,
+    AdapterInfo, ADL_CONTEXT_HANDLE,
 };
 
 pub const ADL_OK: c_int = 0;
@@ -44,3 +45,9 @@ pub type ADL2_OverdriveN_CapabilitiesX2_Get =
 
 pub type ADL2_OverdriveN_FanControl_Get =
     fn(ADL_CONTEXT_HANDLE, c_int, *mut ADLODNFanControl) -> c_int;
+
+pub type ADL2_OverdriveN_PowerLimit_Get =
+    fn(ADL_CONTEXT_HANDLE, c_int, *mut ADLODNPowerLimitSetting) -> c_int;
+
+pub type ADL2_OverdriveN_Temperature_Get =
+    fn(ADL_CONTEXT_HANDLE, c_int, c_int, *mut c_int) -> c_int;

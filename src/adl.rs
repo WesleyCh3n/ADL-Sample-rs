@@ -37,5 +37,13 @@ pub unsafe fn initialize_adl(module: &ModuleHandle) -> Result<ADLLibrary> {
             &module,
             b"ADL2_OverdriveN_FanControl_Get\0",
         )?),
+        adl2_overdriven_powerlimit_get: transmute(get_proc_address(
+            &module,
+            b"ADL2_OverdriveN_PowerLimit_Get\0",
+        )?),
+        adl2_overdriven_temperature_get: transmute(get_proc_address(
+            &module,
+            b"ADL2_OverdriveN_Temperature_Get\0",
+        )?)
     })
 }

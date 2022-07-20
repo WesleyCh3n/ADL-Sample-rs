@@ -14,6 +14,8 @@ pub struct ADLLibrary {
     pub adl2_overdrive_caps: ADL2_Overdrive_Caps,
     pub adl2_overdriven_capabilitiesx2_get: ADL2_OverdriveN_CapabilitiesX2_Get,
     pub adl2_overdriven_fancontrol_get: ADL2_OverdriveN_FanControl_Get,
+    pub adl2_overdriven_powerlimit_get: ADL2_OverdriveN_PowerLimit_Get,
+    pub adl2_overdriven_temperature_get: ADL2_OverdriveN_Temperature_Get,
 }
 
 #[derive(Debug)]
@@ -60,8 +62,7 @@ impl Default for AdapterInfo {
 
 #[derive(Debug, Default)]
 #[repr(C)]
-pub struct ADLODNParameterRange
-{
+pub struct ADLODNParameterRange {
     pub iMode: c_int,
     pub iMin: c_int,
     pub iMax: c_int,
@@ -71,8 +72,7 @@ pub struct ADLODNParameterRange
 
 #[derive(Debug, Default)]
 #[repr(C)]
-pub struct ADLODNCapabilitiesX2
-{
+pub struct ADLODNCapabilitiesX2 {
     pub iMaximumNumberOfPerformanceLevels: c_int,
     pub iFlags: c_int,
     pub sEngineClockRange: ADLODNParameterRange,
@@ -89,8 +89,7 @@ pub struct ADLODNCapabilitiesX2
 
 #[derive(Debug, Default)]
 #[repr(C)]
-pub struct ADLODNFanControl
-{
+pub struct ADLODNFanControl {
     pub iMode: c_int,
     pub iFanControlMode: c_int,
     pub iCurrentFanSpeedMode: c_int,
@@ -112,11 +111,17 @@ pub struct ADLODNPerformanceLevelX2 {
 
 #[derive(Debug)]
 #[repr(C)]
-pub struct ADLODNPerformanceLevelsX2
-{
+pub struct ADLODNPerformanceLevelsX2 {
     pub iSize: c_int,
     pub iMode: c_int,
     pub iNumberOfPerformanceLevels: c_int,
     pub aLevels: [ADLODNPerformanceLevelX2; 1],
 }
 
+#[derive(Debug, Default)]
+#[repr(C)]
+pub struct ADLODNPowerLimitSetting {
+    pub iMode: c_int,
+    pub iTDPLimit: c_int,
+    pub iMaxOperatingTemperature: c_int,
+}
