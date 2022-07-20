@@ -57,8 +57,5 @@ unsafe fn unsafe_main() -> Result<()> {
     print_odn_temp_parameters(&adl, lp_adapter_info)?;
 
     dealloc(lp_adapter_info_raw as *mut u8, layout);
-
-    /* (adl.adl_main_control_destroy)();
-    free_library(&h_dll); */
     Ok(())
 }
