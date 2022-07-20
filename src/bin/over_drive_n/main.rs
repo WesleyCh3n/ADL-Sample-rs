@@ -13,7 +13,6 @@ use windows::core::Result;
 use adl::adl::*;
 use adl::adl_define::*;
 use adl::adl_struct::*;
-use adl::winapi::*;
 
 use self::fan::print_odn_fan_parameters;
 use self::temp::print_odn_temp_parameters;
@@ -22,22 +21,8 @@ fn main() -> Result<()> {
     unsafe { unsafe_main() }
 }
 
-unsafe extern "C" fn adl_main_memory_alloc(i_size: c_int) -> *mut c_void {
-    let layout =
-        Layout::from_size_align_unchecked(i_size as usize, align_of::<c_int>());
-    let ptr = alloc(layout) as *mut c_void;
-    ptr
-}
-
 unsafe fn unsafe_main() -> Result<()> {
-    let h_dll = load_library(b"atiadlxx.dll\0")?;
-
-    let adl = initialize_adl(&h_dll)?;
-
-    if ADL_OK != (adl.adl_main_control_create)(adl_main_memory_alloc, 1) {
-        println!("Failed to initialize nested ADL2 context");
-        return Ok(());
-    }
+    let adl = ADL::new()?;
 
     let mut i_number_adapters: c_int = c_int::default();
     if ADL_OK
@@ -73,7 +58,7 @@ unsafe fn unsafe_main() -> Result<()> {
 
     dealloc(lp_adapter_info_raw as *mut u8, layout);
 
-    (adl.adl_main_control_destroy)();
-    free_library(&h_dll);
+    /* (adl.adl_main_control_destroy)();
+    free_library(&h_dll); */
     Ok(())
 }

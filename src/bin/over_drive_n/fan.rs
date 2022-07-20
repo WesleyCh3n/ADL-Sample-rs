@@ -5,11 +5,11 @@ use std::{
 
 use windows::core::Result;
 
-use adl::adl_define::*;
 use adl::adl_struct::*;
+use adl::{adl::ADL, adl_define::*};
 
 pub unsafe fn print_odn_fan_parameters(
-    adl: &ADLLibrary,
+    adl: &ADL,
     lp_adapter_info: *mut AdapterInfo,
 ) -> Result<()> {
     let context: *mut c_void = ptr::null_mut();

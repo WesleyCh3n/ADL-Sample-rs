@@ -6,18 +6,6 @@ use crate::adl_define::*;
 
 pub type ADL_CONTEXT_HANDLE = *mut c_void;
 
-pub struct ADLLibrary {
-    pub adl_main_control_create: ADL_Main_Control_Create,
-    pub adl_main_control_destroy: ADL_Main_Control_Destroy,
-    pub adl_adapter_number_of_adapters_get: ADL_ADAPTER_NUMBEROFADAPTERS_GET,
-    pub adl_adapter_adapterinfo_get: ADL_Adapter_AdapterInfo_Get,
-    pub adl2_overdrive_caps: ADL2_Overdrive_Caps,
-    pub adl2_overdriven_capabilitiesx2_get: ADL2_OverdriveN_CapabilitiesX2_Get,
-    pub adl2_overdriven_fancontrol_get: ADL2_OverdriveN_FanControl_Get,
-    pub adl2_overdriven_powerlimit_get: ADL2_OverdriveN_PowerLimit_Get,
-    pub adl2_overdriven_temperature_get: ADL2_OverdriveN_Temperature_Get,
-}
-
 #[derive(Debug)]
 #[repr(C)]
 pub struct AdapterInfo {

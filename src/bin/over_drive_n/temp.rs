@@ -5,11 +5,11 @@ use std::{
 
 use windows::core::Result;
 
-use adl::adl_define::*;
 use adl::adl_struct::*;
+use adl::{adl::ADL, adl_define::*};
 
 pub unsafe fn print_odn_temp_parameters(
-    adl: &ADLLibrary,
+    adl: &ADL,
     lp_adapter_info: *mut AdapterInfo,
 ) -> Result<()> {
     let context: *mut c_void = ptr::null_mut();
@@ -62,7 +62,7 @@ pub unsafe fn print_odn_temp_parameters(
     println!("ADL2_OverdriveN_PowerLimit_Get Data");
     println!("{:-^40}", "");
     println!("odNPowerControl.iMode: {:>17}", od_npower_control.iMode);
-    println!("Current temperature: {:>17}\u{00B0}C", temp/1000);
+    println!("Current temperature: {:>17}\u{00B0}C", temp / 1000);
     println!("{:-^40}", " POWER ");
     println!(
         "Min: {:>7}, Max: {:>7}, Step: {:>6}",
