@@ -8,20 +8,17 @@ use windows::core::Result;
 use adl::adl_struct::*;
 use adl::{adl::ADL, adl_define::*};
 
-pub unsafe fn print_odn_temp_parameters(
-    adl: &ADL,
-    lp_adapter_info: *mut AdapterInfo,
-) -> Result<()> {
+pub unsafe fn print_odn_temp_parameters(adl: &ADL) -> Result<()> {
     let context: *mut c_void = ptr::null_mut();
     let (mut i_supported, mut i_enabled, mut i_version) =
         (c_int::default(), c_int::default(), c_int::default());
-    if (*lp_adapter_info.offset(0)).iBusNumber < -1 {
+    if (*adl.lp_adapter_info.offset(0)).iBusNumber < -1 {
         println!("adapter iBusNumber < -1");
         return Ok(());
     }
     (adl.adl2_overdrive_caps)(
         context,
-        (*lp_adapter_info.offset(0)).iAdapterIndex,
+        (*adl.lp_adapter_info.offset(0)).iAdapterIndex,
         &mut i_supported,
         &mut i_enabled,
         &mut i_version,
@@ -34,7 +31,7 @@ pub unsafe fn print_odn_temp_parameters(
     if ADL_OK
         != (adl.adl2_overdriven_capabilitiesx2_get)(
             context,
-            (*lp_adapter_info.offset(0)).iAdapterIndex,
+            (*adl.lp_adapter_info.offset(0)).iAdapterIndex,
             &mut overdrive_capabilities,
         )
     {
@@ -44,7 +41,7 @@ pub unsafe fn print_odn_temp_parameters(
     if ADL_OK
         != ((adl.adl2_overdriven_powerlimit_get)(
             context,
-            (*lp_adapter_info.offset(0)).iAdapterIndex,
+            (*adl.lp_adapter_info.offset(0)).iAdapterIndex,
             &mut od_npower_control,
         ))
     {
@@ -54,7 +51,7 @@ pub unsafe fn print_odn_temp_parameters(
     let mut temp = c_int::default();
     (adl.adl2_overdriven_temperature_get)(
         context,
-        (*lp_adapter_info.offset(0)).iAdapterIndex,
+        (*adl.lp_adapter_info.offset(0)).iAdapterIndex,
         1,
         &mut temp,
     );

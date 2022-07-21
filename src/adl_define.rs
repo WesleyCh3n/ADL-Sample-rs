@@ -36,18 +36,8 @@ pub type ADL_ADAPTER_NUMBEROFADAPTERS_GET = fn(*mut c_int) -> c_int;
 pub type ADL_Main_Control_Create = fn(ADL_MAIN_MALLOC_CALLBACK, c_int) -> c_int;
 pub type ADL_Main_Control_Destroy = fn() -> c_int;
 pub type ADL_Adapter_AdapterInfo_Get = fn(*mut AdapterInfo, c_int) -> c_int;
-
-pub type ADL2_Overdrive_Caps =
-    fn(ADL_CONTEXT_HANDLE, c_int, *mut c_int, *mut c_int, *mut c_int) -> c_int;
-
-pub type ADL2_OverdriveN_CapabilitiesX2_Get =
-    fn(ADL_CONTEXT_HANDLE, c_int, *mut ADLODNCapabilitiesX2) -> c_int;
-
-pub type ADL2_OverdriveN_FanControl_Get =
-    fn(ADL_CONTEXT_HANDLE, c_int, *mut ADLODNFanControl) -> c_int;
-
-pub type ADL2_OverdriveN_PowerLimit_Get =
-    fn(ADL_CONTEXT_HANDLE, c_int, *mut ADLODNPowerLimitSetting) -> c_int;
-
-pub type ADL2_OverdriveN_Temperature_Get =
-    fn(ADL_CONTEXT_HANDLE, c_int, c_int, *mut c_int) -> c_int;
+pub type ADL2_Overdrive_Caps = fn(ADL_CONTEXT_HANDLE, c_int, *mut c_int, *mut c_int, *mut c_int) -> c_int;
+pub type ADL2_OverdriveN_CapabilitiesX2_Get = fn(ADL_CONTEXT_HANDLE, c_int, *mut ADLODNCapabilitiesX2) -> c_int;
+pub type ADL2_OverdriveN_FanControl_Get = fn(ADL_CONTEXT_HANDLE, c_int, *mut ADLODNFanControl) -> c_int;
+pub type ADL2_OverdriveN_PowerLimit_Get = fn(ADL_CONTEXT_HANDLE, c_int, *mut ADLODNPowerLimitSetting) -> c_int;
+pub type ADL2_OverdriveN_Temperature_Get = fn(ADL_CONTEXT_HANDLE, c_int, c_int, *mut c_int) -> c_int;
